@@ -56,7 +56,10 @@ public class PagamentoController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @PatchMapping("/{id}/confirmar")
+    public void confirmarPagamento(@PathVariable @NotNull Long id){
+        service.confirmarPagamento(id);
+    }
 
 
 }
