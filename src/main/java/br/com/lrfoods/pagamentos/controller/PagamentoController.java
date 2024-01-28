@@ -2,6 +2,7 @@ package br.com.lrfoods.pagamentos.controller;
 
 import br.com.lrfoods.pagamentos.dto.PagamentoDto;
 import br.com.lrfoods.pagamentos.service.PagamentoService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,7 @@ public class PagamentoController {
     }
 
     @PatchMapping("/{id}/confirmar")
+    @CircuitBreaker(name = "atualizaPedido", fallbackMethod = "")
     public void confirmarPagamento(@PathVariable @NotNull Long id){
         service.confirmarPagamento(id);
     }
